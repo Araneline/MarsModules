@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="jquery.min.js"></script>
+<script src="common.js"></script>
+<script src="TextScramble.js"></script>
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Экран погоды на Марсе</title>
+</head>
+<body>
+<div class="container bordered-item">
+<!-- Current probe image and info -->
+<div id="left-part">
+	<div class="info-container">
+	<p class="nomargin">Земля:<span class="text-to-right" id="EarthTime">????.??.??</span></p>
+	<p class="no_topmargin">Марс:<span id="MarsTime" class="text-to-right">??.??.??</span></p>
+	<div id="image_container">
+		<img id="probe_image" class="img-responsive bordered-item" src="images/noise.gif" alt="фото с зонда">
+		<img id="noise_image" class="img-responsive bordered-item" src="images/noise.gif" alt="белый шум">
+	</div>
+	<p>Метеозонд:<span id="probe" class="text-to-right">--</span></p>
+	<p class="nomargin">М.О.Д.:<span id="atmo" class="text-to-right">--</span></p>
+	<p class="nomargin">Температура:<span id="temperature" class="text-to-right">--</span></p>
+	<p class="nomargin">Давление:<span id="pressure" class="text-to-right">--</span></p>
+	<p class="nomargin">Направление ветра:<span id="wind_direction" class="text-to-right">--</span></p>
+	<p class="nomargin">Скорость ветра:<span id="wind_speed" class="text-to-right">--</span></p>
+	<p class="no_bottommargin">Восход:<span id="sunrise" class="text-to-right">--</span></p>
+	<p class="nomargin">Закат:<span id="sunset" class="text-to-right">--</span></p>
+	</div>
+</div>
+<!-- Map + probes icons and labels -->
+<div id="right-part">
+	<div class="map-container">
+		<img class="img-responsive bordered-item" src="images/map2.jpg" alt="карта поверхности">
+		<img id="dust-map" class="img-responsive" src="images/dust_map.png" alt="карта пыли">
+		<div id="flag1" class="flags">
+			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
+			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
+			<p class="flagtext">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+		</div>
+		<div id="flag2" class="flags">
+			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
+			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
+			<p class="flagtext">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+		</div>
+		<div id="flag3" class="flags">
+			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
+			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
+			<p class="flagtext">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+		</div>
+		<div id="flag4" class="flags">
+			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
+			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
+			<p class="flagtext">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+		</div>
+		<div id="flag5" class="flags">
+			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
+			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
+			<p class="flagtext">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+			<p class="flagtext invisible">14°28'31.27"S<br>175°55'52.20"E</p>
+		</div>
+	</div>
+</div>
+<!-- Right column -->
+<div id="column"> 
+	<img class="img-responsive icon" src="images/ico_main.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="На главную">
+	<img class="img-responsive icon" src="images/ico_weather.png" alt="Погода">
+	<img class="img-responsive icon" src="images/ico_chat.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Чат">
+	<img class="img-responsive icon" src="images/ico_profile.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Профиль">
+	<img class="img-responsive icon" src="images/ico_med.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Мед модуль">
+	<img class="img-responsive icon" src="images/ico_alerts.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Ошибки">
+	<img class="img-responsive icon" src="images/ico_galaxie.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Галактика">
+	<img class="img-responsive icon" src="images/ico_net.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Сеть">
+	<img class="img-responsive icon" src="images/ico_power.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Питание">
+</div>
+</div>
+</body>
+</html>
