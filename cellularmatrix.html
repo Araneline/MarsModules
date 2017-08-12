@@ -46,7 +46,7 @@ for(var i = 0; i < m; i++){
 
 $('#test2').html(string);
 
-setInterval(function() {mas_evolve()}, 500);
+setInterval(function() {mas_evolve()}, 100);
 });
 
 function mas_evolve() {
@@ -73,18 +73,47 @@ function evolve(cell, row, column) {
 	southCell = mas[rowCheck(row+1)][column];
 	
 	sum = westCell + eastCell + northCell + southCell;
-	switch(sum) {
-		case 0:
+	switch(cell) {
 		case 1:
-			return 0;
+			switch(sum) {
+				case 0:
+				case 1:
+					return 0;
+				case 2:
+					return 1;
+				case 3:
+				case 4:
+					return 2;
+				default:
+					return 0;
+			}
 		case 2:
-		case 3:
-			return 1;
-		case 4:
-			return 2;
+			switch(sum) {
+				case 0:
+				case 1:
+				case 2:
+				case 3:
+					return 1;
+				case 4:
+					return 2;
+				default:
+					return 0;
+			}		
 		default:
-			return 0;
+			switch(sum) {
+				case 0:
+				case 1:
+				case 4:
+					return 0;
+				case 2:
+				case 3:
+					return 1;
+				default:
+					return 0;
+			}
+
 	}
+	
 }
 
 function rowCheck(row) {
