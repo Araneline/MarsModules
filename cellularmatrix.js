@@ -1,4 +1,4 @@
-var n = 20, m = 17;
+var n = 17, m = 20;
 var mas = [];
 var mas_next = [];
 
