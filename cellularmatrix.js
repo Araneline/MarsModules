@@ -35,10 +35,11 @@ function draw(cutting) {
 	var imageObj = new Image();
 	var imageObj2 = new Image();
 	var width_step = context.canvas.width / 20;
-	var height_step = context.canvas.height / 17;
+	var height_step = context.canvas.height / 16.5;
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	imageObj.src = 'images/dust_half.png';
 	imageObj2.src = 'images/dust.png';
+	var size_multiplier = 1.5;
 
 	imageObj.onload = function() {
 		for (var j = 0; j < n; j++){
@@ -46,10 +47,10 @@ function draw(cutting) {
 				for (var i = 0; i < m; i++){
 					switch (mas_next[i][j]) {
 						case 1:
-							context.drawImage(imageObj, width_step * i, height_step * j);				
+							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
 							break;
 						case 2:
-							context.drawImage(imageObj2, width_step * i, height_step * j);				
+							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
 							break;
 						default:
 							break;
@@ -59,10 +60,10 @@ function draw(cutting) {
 				for (var i = 0; i < m; i++){
 					switch (mas[i][j]) {
 						case 1:
-							context.drawImage(imageObj, width_step * i, height_step * j);				
+							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
 							break;
 						case 2:
-							context.drawImage(imageObj2, width_step * i, height_step * j);				
+							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
 							break;
 						default:
 							break;
