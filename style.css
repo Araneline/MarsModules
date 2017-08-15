@@ -9,14 +9,13 @@
 body {
   background: rgb(13,21,26);
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   display: -webkit-flex;
-  -webkit-align-items: center;
+  -webkit-align-items: stretch;
   -webkit-justify-content: center;
   height: 100%;
   margin: 0;
-  padding: 0 15px;
 }
 html {
   height: 100%;
@@ -31,10 +30,18 @@ p {
 }
 #left-part {
   width: 30%;
+  padding: 20px;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-justify-content: space-around;
 }
 #right-part {
   width: 60%;
-  padding-top: 20px;
+  display: -webkit-flex;
+  -webkit-flex-direction: column;
+  -webkit-align-items: stretch;
+  -webkit-justify-content: space-around;
 }
 #column {
   width: 10%;
@@ -175,14 +182,13 @@ p {
 .bordered-item {
   border: 2px solid rgb(195,246,249);
 }
-.info-container {
-  padding: 30px;
-}
 .container {
+  width: 100%;
+  margin: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: stretch;  
 
   display: -webkit-flex;
   -webkit-flex-direction: row;
@@ -190,7 +196,7 @@ p {
   -webkit-align-items: stretch;
 }
 .map-container {
-  margin: 30px;
+  margin: 20px;
   position: relative;
 }
 .text-to-right {
