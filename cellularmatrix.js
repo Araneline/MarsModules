@@ -1,83 +1,108 @@
 var n = 17, m = 20;
 var mas = [];
 var mas_next = [];
+var canvas = null;
+var context = null;
 
 $( document ).ready(function() {
-for (var i = 0; i < m; i++){
+canvas = document.getElementById('dustCanvas');
+context = canvas.getContext('2d');
+context.canvas.width = $('#imgMap').width();
+context.canvas.height = $('#imgMap').height();
+
+for (var i = 0; i < m; i++){ //randomize fiest matrix
     mas[i] = [];
     for (var j = 0; j < n; j++){
         mas[i][j] = Math.floor(Math.random() * (0 - 2) + 2);
 }};
-var string = '';
-for(var i = 0; i < m; i++){
-	string += mas[i] + '<br>';
-}
 
-for (var i = 0; i < m; i++){
+for (var i = 0; i < m; i++){ //inititalize second matrix
     mas_next[i] = [];
     for (var j = 0; j < n; j++){
         mas_next[i][j] = 0;
 }};
 
-for (var i = 0; i < m; i++){
+for (var i = 0; i < m; i++){ //evolve 1 matrix into 2nd
     for (var j = 0; j < n; j++){
         mas_next[i][j] = evolve(mas[i][j],i,j);
 }};
 
-var string = '';
-for(var i = 0; i < m; i++){
-	string += mas_next[i] + '<br>';
-}
-
-draw();
-setInterval(function(){mas_evolve(); draw();}, 2000);
+mas_evolve();
+setInterval(function(){mas_evolve();}, 20000);
 });
 
-function draw() {
-	var canvas = document.getElementById('dustCanvas');
-	var context = canvas.getContext('2d');
+function draw(cutting) {
 	var imageObj = new Image();
 	var imageObj2 = new Image();
-	      
-	context.canvas.width = $('#imgMap').width();
-	context.canvas.height = $('#imgMap').height();
 	var width_step = context.canvas.width / 20;
 	var height_step = context.canvas.height / 17;
-
-	imageObj.onload = function() {
-		for (var i = 0; i < m; i++){
-		    for (var j = 0; j < n; j++){
-				if(mas_next[i][j] == 1) {
-					context.drawImage(imageObj, width_step * i, height_step * j);				
-				}
-		}};
-	};
-
-	imageObj2.onload = function() {
-		for (var i = 0; i < m; i++){
-		    for (var j = 0; j < n; j++){
-				if(mas_next[i][j] == 2) {
-					context.drawImage(imageObj2, width_step * i, height_step * j);				
-				}
-		}};
-	};
+	context.clearRect(0, 0, canvas.width, canvas.height);
 	imageObj.src = 'images/dust_half.png';
 	imageObj2.src = 'images/dust.png';
-}
+
+	imageObj.onload = function() {
+		for (var j = 0; j < n; j++){
+			if (j <= cutting) {
+				for (var i = 0; i < m; i++){
+					switch (mas_next[i][j]) {
+						case 1:
+							context.drawImage(imageObj, width_step * i, height_step * j);				
+							break;
+						case 2:
+							context.drawImage(imageObj2, width_step * i, height_step * j);				
+							break;
+						default:
+							break;
+					}
+				}
+			} else {
+				for (var i = 0; i < m; i++){
+					switch (mas[i][j]) {
+						case 1:
+							context.drawImage(imageObj, width_step * i, height_step * j);				
+							break;
+						case 2:
+							context.drawImage(imageObj2, width_step * i, height_step * j);				
+							break;
+						default:
+							break;
+					}
+				}
+			}
+		}
+	};
+
+};
+
+function drawLoop (i,c) {          
+	setTimeout(function () {   
+	c++;
+	if(c < m) {
+	  	draw(c);          
+		if (document.getElementById('dustCanvas').style.opacity == 0.75) {
+			document.getElementById('dustCanvas').style.opacity = 1;
+		} else {
+			document.getElementById('dustCanvas').style.opacity = 0.75;
+		}            
+	}
+	    if (--i) {
+	    	drawLoop(i,c);      //  decrement i and call drawLoop again if i > 0
+		} else {
+			document.getElementById('dustCanvas').style.opacity = 1;
+		}
+	}, 350)
+};                        //  pass the number of iterations as an argument
 
 function mas_evolve() {
+	var prev = mas_next;
 	for (var i = 0; i < m; i++){
 	    for (var j = 0; j < n; j++){
 	        mas[i][j] = evolve(mas_next[i][j],i,j);
-		}};
-		mas_next = mas;
-	console.log(mas_next);
-	var string = '';
-for(var i = 0; i < m; i++){
-	string += mas_next[i] + '<br>';
-}
-
-$('#test2').html(string);
+		}
+	};
+	mas_next = mas;
+	mas = prev;
+	drawLoop(20,0);
 }
 
 function evolve(cell, row, column) {

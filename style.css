@@ -114,6 +114,9 @@ p {
   position: absolute;
   top: 2px;
   left: 2px;
+
+  -webkit-transition: opacity 0.35s linear; /* Safari */
+  transition: opacity 0.35s linear;    
 }
 .nomargin {
   margin: 0;
