@@ -110,10 +110,10 @@ p {
   top: 63%;
   left: 4%;
 }
-#dust-map {
+#dustCanvas {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 2px;
+  left: 2px;
 }
 .nomargin {
   margin: 0;
