@@ -5,6 +5,7 @@
 <script src="jquery.min.js"></script>
 <script src="common.js"></script>
 <script src="TextScramble.js"></script>
+<script src="cellularmatrix.js"></script>
 <link rel="stylesheet" type="text/css" href="style.css">
 <title>Экран погоды на Марсе</title>
 </head>
@@ -32,8 +33,12 @@
 <!-- Map + probes icons and labels -->
 <div id="right-part">
 	<div class="map-container">
-		<img class="img-responsive bordered-item" src="images/map2.jpg" alt="карта поверхности">
-		<img id="dust-map" class="img-responsive" src="images/dust_map.png" alt="карта пыли">
+		<img id="imgMap" class="img-responsive bordered-item" src="images/map2.jpg" alt="карта поверхности">
+		<canvas id="dustCanvas"></canvas>
+
+		<script>
+	    </script>
+
 		<div id="flag1" class="flags">
 			<img class="invisible" src="images/flag_dot.png" alt="флаг-точка">
 			<img src="images/flag_inactive.png" onmouseover="hover(this);" onmouseout="unhover(this);" onclick="clickflag(this);" alt="флаг зонда">
