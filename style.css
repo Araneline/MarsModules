@@ -59,11 +59,11 @@ p {
 }
 #image_container {
   position: relative;
-  padding: 3.5vh 0;
+  padding: 2.5vw 0;
 }
 #noise_image {
   position: absolute;
-  top: 3.5vh;
+  top: 2.5vw;
   left: 0;
 
   -webkit-transition: opacity 1s linear; /* Safari */
@@ -204,6 +204,7 @@ p {
 }
 .map-container {
   position: relative;
+  margin: 2px;
 }
 .text-to-right {
   flex: 1;
