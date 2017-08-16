@@ -7,8 +7,8 @@ var context = null;
 $( document ).ready(function() {
 canvas = document.getElementById('dustCanvas');
 context = canvas.getContext('2d');
-context.canvas.width = $('#imgMap').width();
-context.canvas.height = $('#imgMap').height();
+context.canvas.width = 992;
+context.canvas.height = 820;
 
 for (var i = 0; i < m; i++){ //randomize fiest matrix
     mas[i] = [];
