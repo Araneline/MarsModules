@@ -14,6 +14,7 @@
 <!-- Current probe image and info -->
 <div class="inner_container">
 <div id="left-part">
+<div style="height: 44.17vw; display: flex; flex-direction: column;">
 	<p class="nomargin">Земля:<span class="text-to-right" id="EarthTime">????.??.??</span></p>
 	<p class="nomargin">Марс:<span id="MarsTime" class="text-to-right">??.??.??</span></p>
 	<div id="image_container">
@@ -29,7 +30,7 @@
 	
 	<p class="nomargin">Восход:<span id="sunrise" class="text-to-right">--</span></p>
 	<p class="nomargin">Закат:<span id="sunset" class="text-to-right">--</span></p>
-	
+</div>
 </div>
 <!-- Map + probes icons and labels -->
 <div id="right-part">
@@ -79,16 +80,18 @@
 </div>
 </div>
 <!-- Right column -->
-<div id="column"> 
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_main.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="На главную"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_weather.png" alt="Погода"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_chat.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Чат"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_profile.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Профиль"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_med.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Мед модуль"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_alerts.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Ошибки"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_galaxie.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Галактика"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_net.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Сеть"></div>
-	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_power.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Питание"></div>
+<div id="inner_column">
+<div id="column">
+	<div class="icon_wrapper"><img class="icon" src="images/ico_main.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="На главную"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_weather.png" alt="Погода"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_chat.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Чат"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_profile.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Профиль"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_med.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Мед модуль"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_alerts.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Ошибки"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_galaxie.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Галактика"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_net.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Сеть"></div>
+	<div class="icon_wrapper"><img class="icon" src="images/ico_power.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Питание"></div>
+</div>
 </div>
 </div>
 </body>
