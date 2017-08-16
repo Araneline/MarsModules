@@ -6,6 +6,6 @@ http://quirktools.com/screenfly/#u=http%3A//www.styles.sidefloors.ru/MarsWeather
 - 1024х768;
 - 1600х1200
 
-# P.S.: Полного совпадения нет, т.к. на jpeg-макете карта 990х880, а в присланных исходниках 992х820 - и кто прав?
+P.S.: Полного совпадения нет, т.к. на jpeg-макете карта 990х880, а в присланных исходниках 992х820 - и кто прав? (Вероятно, макет)
 
 ![LastUpdate](https://image.ibb.co/npsrev/Weather.jpg)
