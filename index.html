@@ -12,28 +12,24 @@
 <body>
 <div class="container bordered-item">
 <!-- Current probe image and info -->
+<div class="inner_container">
 <div id="left-part">
-	
-	<div>
 	<p class="nomargin">Земля:<span class="text-to-right" id="EarthTime">????.??.??</span></p>
-	<p class="no_topmargin">Марс:<span id="MarsTime" class="text-to-right">??.??.??</span></p>
-	</div>
+	<p class="nomargin">Марс:<span id="MarsTime" class="text-to-right">??.??.??</span></p>
 	<div id="image_container">
 		<img id="probe_image" class="img-responsive bordered-item" src="images/noise.gif" alt="фото с зонда">
 		<img id="noise_image" class="img-responsive bordered-item" src="images/noise.gif" alt="белый шум">
 	</div>
-	<p>Метеозонд:<span id="probe" class="text-to-right">--</span></p>
-	<div>
+	<p class="nomargin" style="padding-bottom: 2em;">Метеозонд:<span id="probe" class="text-to-right">--</span></p>
 	<p class="nomargin">М.О.Д.:<span id="atmo" class="text-to-right">--</span></p>
 	<p class="nomargin">Температура:<span id="temperature" class="text-to-right">--</span></p>
 	<p class="nomargin">Давление:<span id="pressure" class="text-to-right">--</span></p>
 	<p class="nomargin">Направление ветра:<span id="wind_direction" class="text-to-right">--</span></p>
-	<p class="nomargin">Скорость ветра:<span id="wind_speed" class="text-to-right">--</span></p>
-	</div>
-	<div>
-	<p class="no_bottommargin">Восход:<span id="sunrise" class="text-to-right">--</span></p>
+	<p class="nomargin" style="padding-bottom: 2em;">Скорость ветра:<span id="wind_speed" class="text-to-right">--</span></p>
+	
+	<p class="nomargin">Восход:<span id="sunrise" class="text-to-right">--</span></p>
 	<p class="nomargin">Закат:<span id="sunset" class="text-to-right">--</span></p>
-	</div>	
+	
 </div>
 <!-- Map + probes icons and labels -->
 <div id="right-part">
@@ -81,17 +77,18 @@
 		</div>
 	</div>
 </div>
+</div>
 <!-- Right column -->
 <div id="column"> 
-	<img class="img-responsive icon" src="images/ico_main.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="На главную">
-	<img class="img-responsive icon" src="images/ico_weather.png" alt="Погода">
-	<img class="img-responsive icon" src="images/ico_chat.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Чат">
-	<img class="img-responsive icon" src="images/ico_profile.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Профиль">
-	<img class="img-responsive icon" src="images/ico_med.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Мед модуль">
-	<img class="img-responsive icon" src="images/ico_alerts.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Ошибки">
-	<img class="img-responsive icon" src="images/ico_galaxie.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Галактика">
-	<img class="img-responsive icon" src="images/ico_net.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Сеть">
-	<img class="img-responsive icon" src="images/ico_power.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Питание">
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_main.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="На главную"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_weather.png" alt="Погода"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_chat.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Чат"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_profile.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Профиль"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_med.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Мед модуль"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_alerts.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Ошибки"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_galaxie.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Галактика"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_net.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Сеть"></div>
+	<div style="flex: 1; width: 50%;"><img class="icon" src="images/ico_power.png" onmouseover="icon_hover(this);" onmouseout="icon_unhover(this);" alt="Питание"></div>
 </div>
 </div>
 </body>
