@@ -61,7 +61,7 @@ p {
 }
 #image_container {
   position: relative;
-  margin: 2.5vw 0;
+  margin: 2.1vw 0;
   border: 2px solid rgb(195,246,249);
 }
 #noise_image {
@@ -132,7 +132,7 @@ p {
 }
 .nomargin {
   margin: 0;
-  padding-bottom: 5px;
+  flex: 1;
 }
 .no_topmargin {
   margin-top: 0;
