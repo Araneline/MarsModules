@@ -4,53 +4,59 @@ var mas_next = [];
 var canvas = null;
 var context = null;
 
-$( document ).ready(function() {
-canvas = document.getElementById('dustCanvas');
-context = canvas.getContext('2d');
-context.canvas.width = 992;
-context.canvas.height = 876;
+var c = 0;
+var globalID;
 
-for (var i = 0; i < m; i++){ //randomize fiest matrix
-    mas[i] = [];
-    for (var j = 0; j < n; j++){
-        mas[i][j] = Math.floor(Math.random() * (0 - 2) + 2);
-}};
+function animate_main_cycle() {
+  var start = performance.now();
+  var c = 0;
+  var prevTime = 0;
 
-for (var i = 0; i < m; i++){ //inititalize second matrix
-    mas_next[i] = [];
-    for (var j = 0; j < n; j++){
-        mas_next[i][j] = 0;
-}};
+  requestAnimationFrame(function checkLoop(time) {
+    // определить, сколько прошло времени с начала анимации
+    var timePassed = time - start;
+    if ((timePassed - prevTime) > 10000) {
+	    mas_evolve();
+	    animate(5000);
+		prevTime = timePassed;
+      	requestAnimationFrame(checkLoop);
+    }
+    // возможно небольшое превышение времени, в этом случае зафиксировать конец
+    if (timePassed > 10000) timePassed = 0;
 
-for (var i = 0; i < m; i++){ //evolve 1 matrix into 2nd
-    for (var j = 0; j < n; j++){
-        mas_next[i][j] = evolve(mas[i][j],i,j);
-}};
-
-mas_evolve();
-setInterval(function(){mas_evolve();}, 20000);
-});
+    // если время анимации не закончилось - запланировать ещё кадр
+    if (timePassed < 10000) {
+      requestAnimationFrame(checkLoop);
+    }
+  });
+};
 
 function draw(cutting) {
 	var imageObj = new Image();
 	var imageObj2 = new Image();
 	var width_step = context.canvas.width / 20;
 	var height_step = context.canvas.height / 16.5;
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	var canvas2 = document.getElementById('dustCanvas2');
+	context2 = canvas2.getContext('2d');
+	context2.canvas.width = 992;
+	context2.canvas.height = 876;
 	imageObj.src = 'images/dust_half.png';
 	imageObj2.src = 'images/dust.png';
 	var size_multiplier = 1.5;
+	var width_seventh = width_step/7;
+	var height_nineth = height_step/9;
+	var width_multi = width_step / size_multiplier;
+	var height_multi = height_step / size_multiplier;
 
-	imageObj.onload = function() {
 		for (var j = 0; j < n; j++){
 			if (j <= cutting) {
 				for (var i = 0; i < m; i++){
 					switch (mas_next[i][j]) {
 						case 1:
-							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context2.drawImage(imageObj, width_seventh + width_step * i, height_step * j - height_nineth, width_multi, height_multi);				
 							break;
 						case 2:
-							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context2.drawImage(imageObj2, width_seventh + width_step * i, height_step * j - height_nineth, width_multi, height_multi);				
 							break;
 						default:
 							break;
@@ -60,10 +66,10 @@ function draw(cutting) {
 				for (var i = 0; i < m; i++){
 					switch (mas[i][j]) {
 						case 1:
-							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context2.drawImage(imageObj, width_seventh + width_step * i, height_step * j - height_nineth, width_multi, height_multi);				
 							break;
 						case 2:
-							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context2.drawImage(imageObj2, width_seventh + width_step * i, height_step * j - height_nineth, width_multi, height_multi);				
 							break;
 						default:
 							break;
@@ -71,28 +77,47 @@ function draw(cutting) {
 				}
 			}
 		}
-	};
+	//grab the context from your destination canvas
+	destinationCanvas = document.getElementById('dustCanvas');
+	var canvas2 = document.getElementById('dustCanvas2');
+	var destCtx = destinationCanvas.getContext('2d');
 
+	//call its drawImage() function passing it the source canvas directly
+	canvas.getContext("2d").clearRect(0, 0, canvas.width, canvas.height);
+	destCtx.drawImage(canvas2, 0, 0);
 };
 
-function drawLoop (i,c) {          
-	setTimeout(function () {   
-	c++;
-	if(c < m) {
-	  	draw(c);          
-		if (document.getElementById('dustCanvas').style.opacity == 0.75) {
-			document.getElementById('dustCanvas').style.opacity = 1;
+
+function animate(duration) {
+  var start = performance.now();
+  var c = 0;
+  var prevTime = 0;
+
+  requestAnimationFrame(function drawLoop(time) {
+    // определить, сколько прошло времени с начала анимации
+    var timePassed = time - start;
+    if ((timePassed - prevTime) > (((duration) - 2000)) / 17) {
+	    c++;
+	    if (c < 18) {
+	    	draw(c);
 		} else {
-			document.getElementById('dustCanvas').style.opacity = 0.75;
-		}            
-	}
-	    if (--i) {
-	    	drawLoop(i,c);      //  decrement i and call drawLoop again if i > 0
-		} else {
-			document.getElementById('dustCanvas').style.opacity = 1;
+			cancelAnimationFrame(drawLoop);
 		}
-	}, 350)
-};                        //  pass the number of iterations as an argument
+		prevTime = timePassed;
+    }
+    // возможно небольшое превышение времени, в этом случае зафиксировать конец
+    if (timePassed > duration) timePassed = duration;
+
+    // нарисовать состояние анимации в момент timePassed
+    
+
+    // если время анимации не закончилось - запланировать ещё кадр
+    if (timePassed < duration) {
+      requestAnimationFrame(drawLoop);
+    }
+
+  });
+};
 
 function mas_evolve() {
 	var prev = mas_next;
@@ -103,7 +128,6 @@ function mas_evolve() {
 	};
 	mas_next = mas;
 	mas = prev;
-	drawLoop(20,0);
 }
 
 function evolve(cell, row, column) {
