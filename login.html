@@ -15,7 +15,7 @@
 </div>
 <p class="info_text nomargin">Для входа в панель терминала используйте персональную ID-карту.</p>
 <p class="info_text nomargin">Использование терминала под чужим ID строго запрещено.</p>
-<p class="info_text nomargin" style="margin-bottom: 10.5vh;">Все действия и операции на данном терминале будут сохранены.</p>
+<p class="info_text nomargin" style="margin-bottom: 7.7vh;">Все действия и операции на данном терминале будут сохранены.</p>
 <div id="console_container">
 <div><span id="first_string" class="consoletext nomargin"></span></div>
 </div>
@@ -27,26 +27,28 @@
 <style>
 .line {
     display: inline-block;
-  -webkit-animation-name: rotate_line; 
-  -webkit-animation-duration: 3s; 
-  -webkit-animation-iteration-count: infinite;
-  -webkit-transition-timing-function: linear;
-  animation-name: rotate_line; 
-  animation-duration: 3s; 
-  animation-iteration-count: infinite;
-  transition-timing-function: linear;
+    font-family: PFDinTextPro-Regular;
 }
 .message {
     padding-right: 1vw;
 }
-@keyframes rotate_line {
+.error {
+  animation-name: blink_anim; 
+  animation-duration: 1s; 
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
+  -webkit-animation-name: blink_anim; 
+  -webkit-animation-duration: 1s; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transition-timing-function: linear;
+}
+
+@keyframes blink_anim {
   0% { 
-    -webkit-transform: rotate(0deg); 
-    -ms-transform: rotate(0deg);
+    opacity: 1; 
   }
-  100% {
-    -webkit-transform: rotate(360deg); 
-    -ms-transform: rotate(360deg); 
+  50% {
+    opacity: 0;
   }
 }
 #message_div {
@@ -64,6 +66,7 @@
 	width: 19.5vw;
     height: 9.5vh; 
     margin-bottom: 7.5vh;
+    transition: all 0.5s linear;
 }
 .button {
     border: rgb(0,98,125) 2px solid;
@@ -115,6 +118,40 @@ input {
 <script src="jquery.min.js"></script>
 
 <script type="text/javascript">
+    var start = performance.now();
+    var line_state = 0;
+    var prevTime = 0;
+
+    function rotate_line(time){
+      var timePassed = time - start;
+      if ((timePassed - prevTime) > 200) {
+        switch(line_state) {
+            case 0:
+                $('.line').css({'transform' : 'rotate(0deg)'});
+                line_state = 1;
+                break;
+            case 1:
+                $('.line').css({'transform' : 'rotate(45deg)'});
+                line_state = 2;
+                break;
+            case 2:
+                $('.line').css({'transform' : 'rotate(90deg)'});
+                line_state = 3;
+                break;
+            case 3:
+                $('.line').css({'transform' : 'rotate(135deg)'});
+                line_state = 0;
+                break;
+        }
+        prevTime = timePassed;
+        requestAnimationFrame(rotate_line);
+      } else {
+        requestAnimationFrame(rotate_line);
+      }
+
+    };
+    requestAnimationFrame(rotate_line);
+
 
     $('#inputID').keyup(function() {
         if($('#inputID').val().length > 0) {
@@ -134,8 +171,9 @@ input {
         $('#console_container').append("<div><span id=\"a_string\" class=\"consoletext nomargin\"></span></div>");
         var typed2 = new Typed("#a_string", {strings: ["// Подключение юзера " + code], typeSpeed: speedType});
 
-        $('#console_container').append("<div><span id=\"b_string\" class=\"consoletext nomargin\"></span></div>");
-        var typed2 = new Typed("#b_string", {strings: ["// Ждём подключения ......"], startDelay: 1500, typeSpeed: speedType, preStringTyped: function(self) {$('#console_container').animate({scrollTop: $('#console_container').prop('scrollHeight')}, 500);}, onComplete: function(self) {errorAuth()}});
+        $('#console_container').append("<div><span id=\"b_string\" class=\"consoletext nomargin\"></span><span id=\"e_string\" class=\"consoletext nomargin\"></span></div>");
+        var typed2 = new Typed("#b_string", {strings: ["// Ждём подключения "], startDelay: 1500, typeSpeed: speedType, preStringTyped: function(self) {$('#console_container').animate({scrollTop: $('#console_container').prop('scrollHeight')}, 500);}});
+        var typed2 = new Typed("#e_string", {strings: ["......"], startDelay: 2000, typeSpeed: 500, onComplete: function(self) {errorAuth()}});
 
         
     };
@@ -143,7 +181,10 @@ input {
     function errorAuth() {
         $('#message_div').children().eq(0).remove();
         $('#message_div').children().eq(0).remove();
-        var typed2 = new Typed("#message_div", {strings: ["<span class=\"message\">Ошибка</span>"], typeSpeed: speedType, startDelay: 1500});
+        $('.outer_border').css('background','rgb(100,0,3)');
+        var typed2 = new Typed("#message_div", {strings: ["<span class=\"message error\">ОШИБКА</span>"], typeSpeed: speedType});
+        $('#console_container').append("<div><span id=\"c_string\" class=\"consoletext nomargin\"></span></div>");
+        var typed2 = new Typed("#c_string", {strings: ["// Ошибка аутентификации."], startDelay: 500, typeSpeed: speedType, preStringTyped: function(self) {$('#console_container').animate({scrollTop: $('#console_container').prop('scrollHeight')}, 500);}});
     }
 
     function updateScroll() {
