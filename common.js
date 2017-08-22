@@ -2,7 +2,7 @@ var today = null;
 var temp_array = [0,0];
 var pressure_array = [0,0];
 var first = true;
-var result;
+var result = null;
 function CheckMaas(){ /* Request to jsonp MAAS API */
     $.ajax({
       url: "http://marsweather.ingenology.com/v1/latest/?format=jsonp",
@@ -24,6 +24,12 @@ function CheckMaas(){ /* Request to jsonp MAAS API */
           }          
       }
     });
+
+    if (result == null) {
+      result = {"terrestrial_date": "2017-08-19", "sol": 1790, "ls": 49.0, "min_temp": -81.0, "min_temp_fahrenheit": -113.8, "max_temp": -12.0, "max_temp_fahrenheit": -7.6, "pressure": 882.0, "pressure_string": "Higher", "abs_humidity": null, "wind_speed": null, "wind_direction": "--", "atmo_opacity": "Sunny", "season": "Month 2", "sunrise": "2017-08-19T11:11:00Z", "sunset": "2017-08-19T22:59:00Z"};
+      today = new Date();
+      today_mars = (today.getFullYear() - 1957) + '.' + (result["season"].match(/[0-9]+/)) + '.' + result["ls"];
+    }
     /* Randomize some numbers for different probes */
     min_deg = -2.5;
     max_deg = 2.5;

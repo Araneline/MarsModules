@@ -1,7 +1,7 @@
 class TextScramble { /* Text animation class */
   constructor(el) {
     this.el = el
-    this.chars = '!<>-_\\/[]{}—=+*^?#____'
+    this.chars = '!<>-_\\/[]{}—=+*^?#__'
     this.update = this.update.bind(this)
   }
   setText(newText) {  
@@ -30,7 +30,7 @@ class TextScramble { /* Text animation class */
         complete++
         output += to
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 0.28) {
+        if (!char || Math.random() < 100) {
           char = this.randomChar()
           this.queue[i].char = char
         }
