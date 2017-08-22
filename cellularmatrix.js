@@ -1,109 +1,97 @@
-var n = 17, m = 20;
 var mas = [];
 var mas_next = [];
 var canvas = null;
 var context = null;
+function animate_main_cycle() {
+  var start = performance.now();
+  var prevTime = 0;
+  var prevTime2 = 0;
 
-$( document ).ready(function() {
-canvas = document.getElementById('dustCanvas');
-context = canvas.getContext('2d');
-context.canvas.width = 992;
-context.canvas.height = 876;
-
-for (var i = 0; i < m; i++){ //randomize fiest matrix
-    mas[i] = [];
-    for (var j = 0; j < n; j++){
-        mas[i][j] = Math.floor(Math.random() * (0 - 2) + 2);
-}};
-
-for (var i = 0; i < m; i++){ //inititalize second matrix
-    mas_next[i] = [];
-    for (var j = 0; j < n; j++){
-        mas_next[i][j] = 0;
-}};
-
-for (var i = 0; i < m; i++){ //evolve 1 matrix into 2nd
-    for (var j = 0; j < n; j++){
-        mas_next[i][j] = evolve(mas[i][j],i,j);
-}};
-
-mas_evolve();
-setInterval(function(){mas_evolve();}, 20000);
-});
+  requestAnimationFrame(function checkLoop(time) {
+    // определить, сколько прошло времени с начала анимации
+    var timePassed = time - start;
+    var timeTillMaas = time - start;
+    if ((timePassed - prevTime) > 30000) {
+	    mas_evolve();
+	    animate(10000);
+		prevTime = timePassed;
+      	requestAnimationFrame(checkLoop);
+    }
+    if ((timeTillMaas - prevTime2) > 3600000) {
+    	CheckMaas();
+    	prevTime2 = timeTillMaas;
+    }
+    // если время анимации не закончилось - запланировать ещё кадр
+    if ((timePassed - prevTime) < 10000) {
+      requestAnimationFrame(checkLoop);
+    }
+  });
+};
 
 function draw(cutting) {
 	var imageObj = new Image();
 	var imageObj2 = new Image();
 	var width_step = context.canvas.width / 20;
 	var height_step = context.canvas.height / 16.5;
-	context.clearRect(0, 0, canvas.width, canvas.height);
 	imageObj.src = 'images/dust_half.png';
 	imageObj2.src = 'images/dust.png';
-	var size_multiplier = 1.5;
+	var width_seventh = width_step/7;
+	var height_nineth = height_step/9;
+	var width_multi = width_step / 1.5;
+	var height_multi = height_step / 1.5;
 
-	imageObj.onload = function() {
-		for (var j = 0; j < n; j++){
-			if (j <= cutting) {
-				for (var i = 0; i < m; i++){
-					switch (mas_next[i][j]) {
+				for (var i = 0; i < 20; i++){
+							context.clearRect(width_seventh + width_step * i, height_step * cutting - height_nineth, width_multi, height_multi);
+					switch (mas_next[i][cutting]) {
 						case 1:
-							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context.drawImage(imageObj, width_seventh + width_step * i, height_step * cutting - height_nineth, width_multi, height_multi);				
 							break;
 						case 2:
-							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
+							context.drawImage(imageObj2, width_seventh + width_step * i, height_step * cutting - height_nineth, width_multi, height_multi);				
 							break;
 						default:
 							break;
 					}
 				}
-			} else {
-				for (var i = 0; i < m; i++){
-					switch (mas[i][j]) {
-						case 1:
-							context.drawImage(imageObj, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
-							break;
-						case 2:
-							context.drawImage(imageObj2, (width_step/7) + width_step * i, height_step * j - (height_step/9), width_step / size_multiplier, height_step / size_multiplier);				
-							break;
-						default:
-							break;
-					}
-				}
-			}
-		}
-	};
-
 };
 
-function drawLoop (i,c) {          
-	setTimeout(function () {   
-	c++;
-	if(c < m) {
-	  	draw(c);          
-		if (document.getElementById('dustCanvas').style.opacity == 0.75) {
-			document.getElementById('dustCanvas').style.opacity = 1;
+
+function animate(duration) {
+  var start = performance.now();
+  var c = 0;
+  var prevTime = 0;
+
+  requestAnimationFrame(function drawLoop(time) {
+    // определить, сколько прошло времени с начала анимации
+    var timePassed = time - start;
+    if ((timePassed - prevTime) > (((duration) - 2000)) / 17) {
+	    c++;
+	    if (c < 18) {
+	    	draw(c);
 		} else {
-			document.getElementById('dustCanvas').style.opacity = 0.75;
-		}            
-	}
-	    if (--i) {
-	    	drawLoop(i,c);      //  decrement i and call drawLoop again if i > 0
-		} else {
-			document.getElementById('dustCanvas').style.opacity = 1;
+			cancelAnimationFrame(drawLoop);
 		}
-	}, 350)
-};                        //  pass the number of iterations as an argument
+		prevTime = timePassed;
+    }
+    // возможно небольшое превышение времени, в этом случае зафиксировать конец
+    if (timePassed > duration) timePassed = duration;
+    // если время анимации не закончилось - запланировать ещё кадр
+    if (timePassed < duration) {
+      requestAnimationFrame(drawLoop);
+    }
+
+  });
+};
 
 function mas_evolve() {
 	var prev = mas_next;
-	for (var i = 0; i < m; i++){
-	    for (var j = 0; j < n; j++){
+	for (var i = 0; i < 20; i++){
+	    for (var j = 0; j < 17; j++){
 	        mas[i][j] = evolve(mas_next[i][j],i,j);
 		}
 	};
 	mas_next = mas;
 	mas = prev;
-	drawLoop(20,0);
 }
 
 function evolve(cell, row, column) {
@@ -162,8 +150,8 @@ function evolve(cell, row, column) {
 function rowCheck(row) {
 	switch(row) {
 		case -1:
-			return m-1;
-		case m:
+			return 19;
+		case 20:
 			return 0;
 		default:
 			return row;
@@ -173,8 +161,8 @@ function rowCheck(row) {
 function columnCheck(column) {
 	switch(column) {
 		case -1:
-			return n-1;
-		case n:
+			return 16;
+		case 17:
 			return 0;
 		default:
 			return column;

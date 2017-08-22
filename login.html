@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="style.css">
+<title>Экран погоды на Марсе</title>
+</head>
+<body>
+<div class="container bordered-item">
+<div style="padding-top: 36.4vh; padding-left: 7.4vw;">
+<p class="nomargin" style="font-size: 2.1vw; font-family: EuropeExt; margin-bottom: 27px; letter-spacing: normal;">ПРОВЕРКА ID:</p>
+<div class="outer_border"><input class="button" placeholder="Введите ID"></div>
+<p class="info_text nomargin">Для входа в панель терминала используйте персональную ID-карту.</p>
+<p class="info_text nomargin">Использование терминала под чужим ID строго запрещено.</p>
+<p class="info_text nomargin" style="margin-bottom: 10.2vh;">Все действия и операции в данном терминале будут сохранены.</p>
+<p id="first_string" class="consoletext nomargin">// MarsOS v1.27</p>
+<p id="second_string" class="consoletext nomargin">// Защищенное соединение : Mars Secure Logon</p>
+</div>
+</div>
+</body>
+</html>
+
+<style>
+.outer_border {
+	border: #c3f6fa 2px solid;
+	padding: 10px;
+	display: flex;
+	width: 19.5vw;
+    height: 9.5vh; 
+    margin-bottom: 7vh;
+}
+.button {
+    border: rgb(0,98,125) 2px solid;
+    width: 100%;
+    flex: 1;
+    background: transparent;
+    color: rgb(195,246,249);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.button::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgb(176,146,97);
+}
+.consoletext {
+	color: rgb(0,98,125);
+	text-transform: none;
+	font-weight: bold;
+	letter-spacing: normal;
+	font-size: 1.4vw;
+}
+.info_text {
+	text-transform: none;
+	font-size: 1.9vw;
+	letter-spacing: normal;
+	font-family: PFDinTextPro-Regular;
+
+}
+input {
+    font-size: 1.5vw;	
+    font-family: EuropeExt;
+}
+</style>
+
+<script src="TextScramble.js"></script>
+
+<script type="text/javascript">
+window.onload = function() {
+  ScrambleEffect('#first_string', '// MarsOS v1.27');
+  ScrambleEffect('#second_string', '// Защищенное соединение : Mars Secure Logon');
+}
+</script>
