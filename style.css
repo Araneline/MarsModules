@@ -538,7 +538,7 @@ p {
   padding: 10px;
   display: flex;
   width: 19.5vw;
-    height: 9.5vh; 
+    height: 4.8vw; 
     margin-bottom: 7.5vh;
     transition: all 0.5s linear;
 }
@@ -571,8 +571,8 @@ p {
   text-transform: none;
     font-size: 1.78vw;
     letter-spacing: 0.05em;
-  font-family: PFDinTextPro-Regular;
-    line-height: 4vh;
+    font-family: PFDinTextPro-Regular;
+    line-height: 1.13em;
 }
 input {
     font-size: 1.5vw; 
@@ -581,6 +581,8 @@ input {
 #console_container {
     height: 75px;
     overflow: auto;
+    position: absolute;
+    bottom: 8vh;
 }
 ::-webkit-scrollbar { 
     display: none; 
