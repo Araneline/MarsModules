@@ -1,7 +1,7 @@
 class TextScramble { /* Text animation class */
   constructor(el) {
     this.el = el
-    this.chars = '!<>-_\\/[]{}—=+*^?#__'
+    this.chars = '!<>-_\\/[]{}—=+*^?#____'
     this.update = this.update.bind(this)
   }
   setText(newText) {  
@@ -48,7 +48,7 @@ class TextScramble { /* Text animation class */
     }
   }
   randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)]
+    return this.chars[Math.floor(Math.random() * 22)]
   }
 };
 function ScrambleEffect(selector,text) { /* Call this to animate text */

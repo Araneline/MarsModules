@@ -51,7 +51,7 @@ function SetInfo(probe_number){ /* Change left-side info (except image and probe
             break;
         }
         ScrambleEffect('#atmo', atmosphere);
-        ScrambleEffect('#temperature', ((parseFloat(result["max_temp"]) + parseFloat(temp_array[probe_number])) + "°C"));
+        ScrambleEffect('#temperature', ((parseFloat(result["max_temp"]) + parseFloat(temp_array[probe_number])).toFixed(2) + "°C"));
         ScrambleEffect('#pressure', ((parseFloat(result["pressure"]) + parseFloat(pressure_array[probe_number])).toString()));
         ScrambleEffect('#atmo', atmosphere);
         ScrambleEffect('#sunrise', (result["sunrise"].match(/[0-9]{2}\:[0-9]{2}\:[0-9]{2}/)));
