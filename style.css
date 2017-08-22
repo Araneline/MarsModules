@@ -537,6 +537,7 @@ p {
   border: #c3f6fa 2px solid;
   padding: 10px;
   display: flex;
+  -moz-display: flex;
   width: 19.5vw;
     height: 4.8vw; 
     margin-bottom: 7.5vh;
@@ -545,7 +546,7 @@ p {
 .button {
     border: rgb(0,98,125) 2px solid;
     width: 100%;
-    flex: 1;
+    width: -moz-available;
     background: transparent;
     color: rgb(195,246,249);
     text-align: center;
@@ -553,6 +554,9 @@ p {
     display: inline-block;
 }
 .button::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgb(176,146,97);
+}
+.button::-moz-placeholder {
   color: rgb(176,146,97);
 }
 .consoletext {
@@ -580,7 +584,7 @@ input {
 }
 #console_container {
     height: 75px;
-    overflow: auto;
+    overflow: hidden;
     position: absolute;
     bottom: 8vh;
 }
