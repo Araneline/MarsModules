@@ -1,7 +1,7 @@
 class TextScramble { /* Text animation class */
   constructor(el) {
     this.el = el
-    this.chars = '!<>-_\\/[]{}—=+*^?#________'
+    this.chars = '!<>-_\\/[]{}—=+*^?#____'
     this.update = this.update.bind(this)
   }
   setText(newText) {  

@@ -143,9 +143,9 @@ context = canvas.getContext('2d');
 context.canvas.width = 566;
 context.canvas.height = 500;
 
-for (var i = 0; i < m; i++){ //randomize fiest matrix
+for (var i = 0; i < 20; i++){ //randomize fiest matrix
     mas[i] = [];
-    for (var j = 0; j < n; j++){
+    for (var j = 0; j < 17; j++){
       if (Math.floor(Math.random() * (0 - 2) + 2) == 0) {
           mas[i][j] = Math.floor(Math.random() * (0 - 2) + 2);
       } else {
@@ -153,14 +153,14 @@ for (var i = 0; i < m; i++){ //randomize fiest matrix
       }
 }};
 
-for (var i = 0; i < m; i++){ //inititalize second matrix
+for (var i = 0; i < 20; i++){ //inititalize second matrix
     mas_next[i] = [];
-    for (var j = 0; j < n; j++){
+    for (var j = 0; j < 17; j++){
         mas_next[i][j] = 0;
 }};
 
-for (var i = 0; i < m; i++){ //evolve 1 matrix into 2nd
-    for (var j = 0; j < n; j++){
+for (var i = 0; i < 20; i++){ //evolve 1 matrix into 2nd
+    for (var j = 0; j < 17; j++){
         mas_next[i][j] = evolve(mas[i][j],i,j);
 }};
 
