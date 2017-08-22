@@ -30,7 +30,7 @@ class TextScramble { /* Text animation class */
         complete++
         output += to
       } else if (this.frame >= start) {
-        if (!char || Math.random() < 100) {
+        if (!char || Math.random() < 1.0) {
           char = this.randomChar()
           this.queue[i].char = char
         }
