@@ -9,12 +9,13 @@
 <div class="container bordered-item">
 <div style="padding-top: 36.4vh; padding-left: 7.4vw;">
 <p class="nomargin" style="font-size: 2.1vw; font-family: EuropeExt; margin-bottom: 27px; letter-spacing: normal;">ПРОВЕРКА ID:</p>
-<div class="outer_border"><input class="button" placeholder="Введите ID"></div>
+<div class="outer_border"><input class="button" placeholder="Введите ID" autofocus type="password"></div>
 <p class="info_text nomargin">Для входа в панель терминала используйте персональную ID-карту.</p>
 <p class="info_text nomargin">Использование терминала под чужим ID строго запрещено.</p>
-<p class="info_text nomargin" style="margin-bottom: 10.2vh;">Все действия и операции в данном терминале будут сохранены.</p>
-<p id="first_string" class="consoletext nomargin">// MarsOS v1.27</p>
-<p id="second_string" class="consoletext nomargin">// Защищенное соединение : Mars Secure Logon</p>
+<p class="info_text nomargin" style="margin-bottom: 10.5vh;">Все действия и операции на данном терминале будут сохранены.</p>
+<div id="console_container">
+<div><span id="first_string" class="consoletext nomargin"></span></div>
+</div>
 </div>
 </div>
 </body>
@@ -27,7 +28,7 @@
 	display: flex;
 	width: 19.5vw;
     height: 9.5vh; 
-    margin-bottom: 7vh;
+    margin-bottom: 7.5vh;
 }
 .button {
     border: rgb(0,98,125) 2px solid;
@@ -43,30 +44,61 @@
   color: rgb(176,146,97);
 }
 .consoletext {
-	color: rgb(0,98,125);
+    font-family: PFDinTextPro-Regular;
+  	color: rgb(0,98,125);
 	text-transform: none;
 	font-weight: bold;
 	letter-spacing: normal;
 	font-size: 1.4vw;
+    white-space:pre;
+    animation: type 8s steps(60, end);
+    white-space: pre;
+    overflow: hidden;
+    width: 100%;
 }
 .info_text {
 	text-transform: none;
-	font-size: 1.9vw;
-	letter-spacing: normal;
+    font-size: 1.78vw;
+    letter-spacing: 0.05em;
+    font-weight: bold;
 	font-family: PFDinTextPro-Regular;
-
 }
 input {
     font-size: 1.5vw;	
     font-family: EuropeExt;
 }
+#console_container {
+    height: 75px;
+    overflow: auto;
+}
+::-webkit-scrollbar { 
+    display: none; 
+}
 </style>
 
-<script src="TextScramble.js"></script>
+<script src="lib/typed.min.js" type="text/javascript"></script>
+<script src="assets/demos.js"></script>
+<script src="jquery.min.js"></script>
 
 <script type="text/javascript">
-window.onload = function() {
-  ScrambleEffect('#first_string', '// MarsOS v1.27');
-  ScrambleEffect('#second_string', '// Защищенное соединение : Mars Secure Logon');
-}
+    function updateScroll() {
+        var element = document.getElementById("console_container");
+        element.scrollTop = element.scrollHeight;
+    }
+
+    var fontSize = $('#first_string').css('font-size');
+    var lineHeight = Math.floor(parseInt(fontSize.replace('px','')) * 1.3);
+
+    $('#console_container').css('height', lineHeight * 3);
+
+    var typed = new Typed("#first_string", {strings: ["// MarsOS v1.27"], typeSpeed: 50});
+
+    $('#console_container').append("<div><span id=\"second_string\" class=\"consoletext nomargin\"></span></div>");
+    var typed2 = new Typed("#second_string", {strings: ["// Защищенное соединение  : Mars Secure Logon"], startDelay: 1500, typeSpeed: 50});
+        
+    //$('#console_container').append("<div><span id=\"third_string\" class=\"consoletext nomargin\"></span></div>");
+    //var typed2 = new Typed("#third_string", {strings: ["// Защищенное соединение  : Mars Secure Logon"], startDelay: 5000, typeSpeed: 50, preStringTyped: function(self) {$('#console_container').animate({scrollTop: $('#console_container').prop('scrollHeight')}, 500);}});
+    
+    
+    
 </script>
