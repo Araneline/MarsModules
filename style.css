@@ -39,10 +39,10 @@ html {
   height: 100%;
 }
 p {
-  font-family: PFDinTextPro-Regular;
-  color: rgb(195,246,249);
   display: flex;
   display: -webkit-flex;
+  font-family: PFDinTextPro-Regular;
+  color: rgb(195,246,249);
   font-size: 1.15vw;
   text-transform: uppercase;
   letter-spacing:0.1em;
@@ -498,4 +498,90 @@ p {
   -ms-transform: rotate(105deg); 
   opacity: 0.25;
   }
+}
+/* Login form */
+.line {
+    display: inline-block;
+    font-family: PFDinTextPro-Regular;
+}
+.message {
+    padding-right: 1vw;
+}
+.error {
+  animation-name: blink_anim; 
+  animation-duration: 1s; 
+  animation-iteration-count: infinite;
+  transition-timing-function: linear;
+  -webkit-animation-name: blink_anim; 
+  -webkit-animation-duration: 1s; 
+  -webkit-animation-iteration-count: infinite;
+  -webkit-transition-timing-function: linear;
+}
+@keyframes blink_anim {
+  0% { 
+    opacity: 1; 
+  }
+  50% {
+    opacity: 0;
+  }
+}
+#message_div {
+    font-size: 1.4vw;   
+    font-family: EuropeExt;
+    margin-bottom: 7.5vh;
+    /* color: rgb(121,183,0); */
+    color: rgb(176,146,97);
+    padding-left: 2.2vw;
+}
+.outer_border {
+  border: #c3f6fa 2px solid;
+  padding: 10px;
+  display: flex;
+  width: 19.5vw;
+    height: 9.5vh; 
+    margin-bottom: 7.5vh;
+    transition: all 0.5s linear;
+}
+.button {
+    border: rgb(0,98,125) 2px solid;
+    width: 100%;
+    flex: 1;
+    background: transparent;
+    color: rgb(195,246,249);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+.button::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: rgb(176,146,97);
+}
+.consoletext {
+    font-family: PFDinTextPro-Regular;
+    color: rgb(0,98,125);
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 1.2vw;
+    white-space:pre;
+    animation: type 8s steps(60, end);
+    white-space: pre;
+    overflow: hidden;
+    width: 100%;
+}
+.info_text {
+  text-transform: none;
+    font-size: 1.78vw;
+    letter-spacing: 0.05em;
+  font-family: PFDinTextPro-Regular;
+    line-height: 4vh;
+}
+input {
+    font-size: 1.5vw; 
+    font-family: EuropeExt;
+}
+#console_container {
+    height: 75px;
+    overflow: auto;
+}
+::-webkit-scrollbar { 
+    display: none; 
 }
