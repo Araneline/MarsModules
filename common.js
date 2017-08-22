@@ -122,8 +122,24 @@ function clickflag(element) { /* Click on Probe */
         break;
     }
     ScrambleEffect('#probe', probe);
-    setTimeout(function(){element.setAttribute('src', 'images/flag_inactive.png'); $(element).parent().children().eq(0).removeClass('invisible'); $(element).parent().removeClass('glitch');},1500); /* time for probe glitch effect */
-    setTimeout(function(){$("#probe_image").attr('src', probe_img); $("#noise_image").css('opacity', '0');}, 750); /* time for noise on the image */
+    var start = performance.now();
+
+    function glitches(time){
+      var timePassed = time - start;
+      if (timePassed > 1000) {
+        element.setAttribute('src', 'images/flag_inactive.png');
+        $(element).parent().children().eq(0).removeClass('invisible');
+        $(element).parent().removeClass('glitch');
+        $("#probe_image").attr('src', probe_img);
+        $("#noise_image").css('opacity', '0');
+        cancelAnimationFrame(glitches);
+      } else {
+        requestAnimationFrame(glitches);
+      }
+
+    };
+    requestAnimationFrame(glitches);
+
   }
 };
 function icon_hover(icon) { /* on icon hover (right column) */
@@ -164,8 +180,7 @@ for (var i = 0; i < 20; i++){ //evolve 1 matrix into 2nd
         mas_next[i][j] = evolve(mas[i][j],i,j);
 }};
 
-  CheckMaas(); 
-  setInterval(CheckMaas,3600000); /* Check MAAS API every hour */
+  CheckMaas();
   today = new Date(); /* Today is? */
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!

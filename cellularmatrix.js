@@ -5,15 +5,21 @@ var context = null;
 function animate_main_cycle() {
   var start = performance.now();
   var prevTime = 0;
+  var prevTime2 = 0;
 
   requestAnimationFrame(function checkLoop(time) {
     // определить, сколько прошло времени с начала анимации
     var timePassed = time - start;
+    var timeTillMaas = time - start;
     if ((timePassed - prevTime) > 30000) {
 	    mas_evolve();
 	    animate(10000);
 		prevTime = timePassed;
       	requestAnimationFrame(checkLoop);
+    }
+    if ((timeTillMaas - prevTime2) > 3600000) {
+    	CheckMaas();
+    	prevTime2 = timeTillMaas;
     }
     // если время анимации не закончилось - запланировать ещё кадр
     if ((timePassed - prevTime) < 10000) {
