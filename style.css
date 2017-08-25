@@ -591,3 +591,6 @@ input {
 ::-webkit-scrollbar { 
     display: none; 
 }
+#inputID:focus {
+    outline: none;
+}
