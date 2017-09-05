@@ -154,16 +154,15 @@ function icon_hover(icon) { /* on icon hover (right column) */
   {
 
   } else {
-    
     $(icon).addClass('clicked_icon');
     var input = $(icon).attr('src');
     icon.setAttribute('src', [input.slice(0, position), "_chosen", input.slice(position)].join(''));
 
     setTimeout(function() {
-    var input = $('.clicked_icon').attr('src');
+    var input = $(icon).attr('src');
     input = input.replace('_chosen','');
-    $('.clicked_icon').attr('src', input);
-    $('.clicked_icon').removeClass('clicked_icon');
+    $(icon).attr('src', input);
+    $(icon).removeClass('clicked_icon');
     },1000); 
   }  
 };
@@ -215,14 +214,4 @@ for (var i = 0; i < 20; i++){ //evolve 1 matrix into 2nd
 mas_evolve();
 animate(10000);
 animate_main_cycle();
-};
-
-window.addEventListener("touchstart", touchHandler, false);
-
-function touchHandler(event){
-    if(event.touches.length > 1){
-        //the event is multi-touch
-        //you can then prevent the behavior
-        event.preventDefault()
-    }
 };
