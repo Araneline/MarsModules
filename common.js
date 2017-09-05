@@ -90,11 +90,12 @@ if (element.hasAttribute('clicked'))
 function clickflag(element) { /* Click on Probe */
   if (!(element.hasAttribute('clicked')))
   {
+        cancelAnimationFrame(glitches);
     $("#noise_image").css('opacity', '1');
     element.setAttribute('src', 'images/flag_active.png');  
     var prev_img = $("img[clicked='true']");
     prev_img.removeAttr('clicked');
-    prev_img.parent().children().eq(0).addClass('invisible');
+    $('.dot_img').addClass('invisible');
     prev_img.attr('src', 'images/flag_inactive.png');
 
     $(element).parent().addClass('glitch');    
@@ -134,6 +135,7 @@ function clickflag(element) { /* Click on Probe */
       var timePassed = time - start;
       if (timePassed > 1000) {
         element.setAttribute('src', 'images/flag_inactive.png');
+        $('.dot_img').addClass('invisible');
         $(element).parent().children().eq(0).removeClass('invisible');
         $(element).parent().removeClass('glitch');
         $("#probe_image").attr('src', probe_img);
