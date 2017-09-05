@@ -173,7 +173,6 @@ p {
   width: 4%;
 }
 .flags img:hover {
-  cursor: pointer;
   -webkit-animation-name: rotate; 
   -webkit-animation-duration: 9s; 
   -webkit-animation-iteration-count: infinite;
@@ -235,7 +234,6 @@ p {
   text-align: right;
 }
 .icon {
-  cursor: pointer;
   width: 100%;
 }
 .icon_wrapper {
