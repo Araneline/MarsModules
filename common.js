@@ -150,8 +150,22 @@ function clickflag(element) { /* Click on Probe */
 };
 function icon_hover(icon) { /* on icon hover (right column) */
   var position = -4;
-  var input = $(icon).attr('src');
-  icon.setAttribute('src', [input.slice(0, position), "_chosen", input.slice(position)].join(''));
+  if ($(icon).hasClass('clicked_icon'))
+  {
+
+  } else {
+    
+    $(icon).addClass('clicked_icon');
+    var input = $(icon).attr('src');
+    icon.setAttribute('src', [input.slice(0, position), "_chosen", input.slice(position)].join(''));
+
+    setTimeout(function() {
+    var input = $('.clicked_icon').attr('src');
+    input = input.replace('_chosen','');
+    $('.clicked_icon').attr('src', input);
+    $('.clicked_icon').removeClass('clicked_icon');
+    },1000); 
+  }  
 };
 function icon_unhover(icon) { /* on icon unhover (right column) */
   var input = $(icon).attr('src');
