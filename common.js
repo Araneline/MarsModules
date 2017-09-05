@@ -202,7 +202,7 @@ for (var i = 0; i < 20; i++){ //evolve 1 matrix into 2nd
   today = new Date(); /* Today is? */
   var dd = today.getDate();
   var mm = today.getMonth()+1; //January is 0!
-  var yyyy = today.getFullYear() + 50;
+  var yyyy = 2060;
   if(dd<10) {
       dd = '0'+dd
   } 
