@@ -157,8 +157,6 @@ function icon_unhover(icon) { /* on icon unhover (right column) */
   var input = $(icon).attr('src');
   icon.setAttribute('src', input.replace('_chosen',''));
 };
-
-
 window.onload = function() {
 canvas = document.getElementById('dustCanvas');
 context = canvas.getContext('2d');
@@ -203,4 +201,14 @@ for (var i = 0; i < 20; i++){ //evolve 1 matrix into 2nd
 mas_evolve();
 animate(10000);
 animate_main_cycle();
+};
+
+window.addEventListener("touchstart", touchHandler, false);
+
+function touchHandler(event){
+    if(event.touches.length > 1){
+        //the event is multi-touch
+        //you can then prevent the behavior
+        event.preventDefault()
+    }
 };
